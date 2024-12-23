@@ -1,0 +1,4 @@
+{
+  "postgres_dsn": "postgres://postgres:123@task_database:5432/task_board?sslmode=disable",
+  "up_port": ":8080"
+}

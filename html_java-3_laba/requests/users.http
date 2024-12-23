@@ -1,0 +1,12 @@
+###
+# @name Add user
+POST http://localhost:8080/api/users
+Content-Type: application/json
+
+{
+    "name": "Andre"
+}
+
+###
+# @name Check that user exist
+GET http://localhost:8080/api/users/exist?user=Andre

@@ -1,0 +1,22 @@
+###
+# @name GetTasks
+GET http://localhost:8080/api/tasks
+
+###
+# @name AddTask
+POST http://localhost:8080/api/tasks
+Content-Type: application/json
+
+{
+    "user": "Andrey",
+    "description": "What",
+    "category": "todo"
+}
+
+###
+# @name UpdateTask
+PATCH http://localhost:8080/api/tasks?user=Anton&description=What&category=done
+
+###
+# @name DeleteTask
+DELETE http://localhost:8080/api/tasks?user=Anton&description=What

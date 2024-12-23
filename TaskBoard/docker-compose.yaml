@@ -1,0 +1,46 @@
+version: "3.9"
+
+networks:
+  dev-network:
+    driver: bridge
+
+services:
+  database:
+    image: postgres:latest
+    container_name: task_database
+    ports:
+      - "5400:5432"
+    volumes:
+      - ./database/migration.sql:/docker-entrypoint-initdb.d/init.sql
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123
+      POSTGRES_DB: task_board
+    restart: always
+    networks:
+      - dev-network
+
+  frontend:
+    container_name: task_frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:80"
+    restart: always
+    networks:
+      - dev-network
+    depends_on:
+      - api
+  api:
+    container_name: task_api
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    restart: always
+    networks:
+      - dev-network
+    depends_on:
+      - database
